@@ -1,0 +1,68 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("APP_DB_URL")
+}
+
+model User {
+  id                  Int      @id @default(autoincrement())
+  firstName           String?
+  lastName            String?
+  isAdmin             Boolean
+  email               String   @unique
+  password            String
+  flagDefaultPassword Boolean  @default(true)
+  createTs            DateTime @default(now())
+}
+
+model Book {
+  id              BigInt    @id @default(autoincrement())
+  title           String    @unique
+  author          String
+  publicationYear Int
+  isbn            String    @unique
+  price           Decimal
+  total           Int       @default(0)
+  createTs        DateTime  @default(now())
+  BookTag         BookTag[]
+  Borrow          Borrow[]
+}
+
+model Tag {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String
+  BookTag     BookTag[]
+}
+
+model Member {
+  id            BigInt   @id @default(autoincrement())
+  name          String
+  countryCode   String
+  contactNumber String
+  address       String
+  createTs      DateTime @default(now())
+  Borrow        Borrow[]
+}
+
+model BookTag {
+  bookId BigInt
+  tagId  Int
+
+  book Book @relation(fields: [bookId], references: [id])
+  tag  Tag  @relation(fields: [tagId], references: [id])
+
+  @@id([bookId, tagId])
+}
+
+model Borrow {
+  id             BigInt    @id @default(autoincrement())
+  bookId         BigInt
+  memberId       BigInt
+  borrowDate     DateTime  @default(now())
+  returnDate     DateTime?
+  lateReturnFee  Decimal?
+  borrowDuration Int
+
+  book   Book   @relation(fields: [bookId], references: [id])
+  member Member @relation(fields: [memberId], references: [id])
+}
