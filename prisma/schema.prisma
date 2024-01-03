@@ -22,6 +22,7 @@ model Book {
   isbn            String    @unique
   price           Decimal
   total           Int       @default(0)
+  image           String
   createTs        DateTime  @default(now())
   BookTag         BookTag[]
   Borrow          Borrow[]

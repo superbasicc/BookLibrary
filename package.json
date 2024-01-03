@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
+    "@rewind-ui/core": "^0.19.4",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
     "@tanstack/react-query": "^4.36.1",
     "@trpc/client": "^10.45.0",
     "@trpc/next": "^10.45.0",
@@ -20,10 +23,12 @@
     "@types/react-dom": "18.2.18",
     "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
+    "framer-motion": "^10.16.16",
     "next": "14.0.4",
     "prisma": "^5.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tailwind-scrollbar": "^3.0.5",
     "typescript": "5.3.3",
     "zod": "^3.22.4"
   },
